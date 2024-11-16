@@ -1,0 +1,7 @@
+KDTree.Construct 27 0.00016594
+KDTree.kNN 18 0.000209352
+KDTree.kNNRandom 8 0
+KDTree.kNNRandomDIM2 3 0
+KDTree.kNNRandomDIM3 4 0.0139049
+---
+KDTree.kNNRandomDIM2

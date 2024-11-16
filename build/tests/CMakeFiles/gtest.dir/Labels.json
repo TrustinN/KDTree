@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/CMakeFiles/gtest"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/CMakeFiles/gtest.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/CMakeFiles/gtest-complete.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-build.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-configure.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-download.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-install.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-mkdir.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-patch.rule"
+		},
+		{
+			"file" : "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"gtest"
+		],
+		"name" : "gtest"
+	}
+}

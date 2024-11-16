@@ -1,0 +1,121 @@
+Start testing: Nov 16 02:22 PST
+----------------------------------------------------------
+1/4 Testing: KDTree.Construct
+1/4 Test: KDTree.Construct
+Command: "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/kd_construct" "--gtest_filter=KDTree.Construct" "--gtest_also_run_disabled_tests"
+Directory: /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests
+"KDTree.Construct" start time: Nov 16 02:22 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = KDTree.Construct
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from KDTree
+[ RUN      ] KDTree.Construct
+[       OK ] KDTree.Construct (0 ms)
+[----------] 1 test from KDTree (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"KDTree.Construct" end time: Nov 16 02:22 PST
+"KDTree.Construct" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: KDTree.kNN
+2/4 Test: KDTree.kNN
+Command: "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/kd_construct" "--gtest_filter=KDTree.kNN" "--gtest_also_run_disabled_tests"
+Directory: /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests
+"KDTree.kNN" start time: Nov 16 02:22 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = KDTree.kNN
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from KDTree
+[ RUN      ] KDTree.kNN
+[       OK ] KDTree.kNN (0 ms)
+[----------] 1 test from KDTree (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"KDTree.kNN" end time: Nov 16 02:22 PST
+"KDTree.kNN" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: KDTree.kNNRandomDIM2
+3/4 Test: KDTree.kNNRandomDIM2
+Command: "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/kd_construct" "--gtest_filter=KDTree.kNNRandomDIM2" "--gtest_also_run_disabled_tests"
+Directory: /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests
+"KDTree.kNNRandomDIM2" start time: Nov 16 02:22 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = KDTree.kNNRandomDIM2
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from KDTree
+[ RUN      ] KDTree.kNNRandomDIM2
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/tests/kd_construct.cpp:86: Failure
+Expected equality of these values:
+  answer
+    Which is: { 0.875673, 1.54319 }
+  points[result[0]]
+    Which is: { 1.83145, 1.96763 }
+[  FAILED  ] KDTree.kNNRandomDIM2 (51 ms)
+[----------] 1 test from KDTree (51 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (51 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] KDTree.kNNRandomDIM2
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Failed.
+"KDTree.kNNRandomDIM2" end time: Nov 16 02:22 PST
+"KDTree.kNNRandomDIM2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: KDTree.kNNRandomDIM3
+4/4 Test: KDTree.kNNRandomDIM3
+Command: "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/kd_construct" "--gtest_filter=KDTree.kNNRandomDIM3" "--gtest_also_run_disabled_tests"
+Directory: /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests
+"KDTree.kNNRandomDIM3" start time: Nov 16 02:22 PST
+Output:
+----------------------------------------------------------
+Running main() from /Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = KDTree.kNNRandomDIM3
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from KDTree
+[ RUN      ] KDTree.kNNRandomDIM3
+[       OK ] KDTree.kNNRandomDIM3 (51 ms)
+[----------] 1 test from KDTree (51 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (51 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"KDTree.kNNRandomDIM3" end time: Nov 16 02:22 PST
+"KDTree.kNNRandomDIM3" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 16 02:22 PST

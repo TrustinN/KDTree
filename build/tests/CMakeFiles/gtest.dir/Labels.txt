@@ -1,0 +1,13 @@
+# Target labels
+ gtest
+# Source files and their labels
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/CMakeFiles/gtest
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/CMakeFiles/gtest.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/CMakeFiles/gtest-complete.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-build.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-configure.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-download.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-install.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-mkdir.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-patch.rule
+/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/gtest/src/gtest-stamp/gtest-update.rule

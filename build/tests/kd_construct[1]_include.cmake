@@ -1,0 +1,5 @@
+if(EXISTS "/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/kd_construct[1]_tests.cmake")
+  include("/Users/trustinnguyen/Downloads/Programming/CPP/KDTree/build/tests/kd_construct[1]_tests.cmake")
+else()
+  add_test(kd_construct_NOT_BUILT kd_construct_NOT_BUILT)
+endif()
