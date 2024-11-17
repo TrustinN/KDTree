@@ -20,7 +20,7 @@ template <size_t k> using pt = std::array<double_t, k>;
 template <size_t k> struct kdNode {
   kdNode(pt<k> location, int split_axis, int id)
       : left(nullptr), right(nullptr), loc(location), _split_axis(split_axis),
-        _id(id){};
+        _id(id) {};
   kdNode<k> *left;
   kdNode<k> *right;
   pt<k> loc;
@@ -159,16 +159,18 @@ std::vector<int> KDTree<k>::kNearestNeighbors(const pt<k> &p) {
 
     int axis = node->_split_axis;
     // find distance to hyperplane by axis
-    if (std::pow(p[axis] - loc[axis], 2) < minDist) {
+    if (std::pow(p[axis] - loc[axis], 2) <= minDist) {
       // We must explore this node also
 
       // find out which side of axis node is currently on
-      if (p[axis] < loc[axis]) {
+      // >= because the way we traversed the tree was
+      // < means go left
+      if (p[axis] >= loc[axis]) {
         ::explore<k>(node->left, p, traversed);
       } else {
         ::explore<k>(node->right, p, traversed);
       }
-    };
+    }
   }
 
   std::vector<int> neighbors = {nearestNode->_id};

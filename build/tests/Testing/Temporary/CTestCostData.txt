@@ -1,7 +1,9 @@
-KDTree.Construct 27 0.00016594
-KDTree.kNN 18 0.000209352
+KDTree.Construct 99 4.34213e-05
+KDTree.kNN 43 9.87374e-05
 KDTree.kNNRandom 8 0
-KDTree.kNNRandomDIM2 3 0
-KDTree.kNNRandomDIM3 4 0.0139049
+KDTree.kNNRandomDIM2 72 4.81794e-05
+KDTree.kNNRandomDIM3 73 0.000652646
+KDTreeTest.BoundaryEdgeCase 1 0.00364546
+KDTree.kNNBoundary 46 7.97781e-05
+KDTree.kNNBoundaryDense 47 7.5008e-05
 ---
-KDTree.kNNRandomDIM2
