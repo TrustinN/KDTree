@@ -8,10 +8,11 @@ project(
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_EXPORT_COMPILE_COMMANDS True)
 
 add_executable(main src/main.cpp)
 
 include_directories(build/_deps)
 add_subdirectory(tests)
+add_subdirectory(benchmarks)

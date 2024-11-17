@@ -5,49 +5,76 @@
 
 template <size_t k> using pt = std::array<double, k>;
 
-TEST(KDTree, Construct) {
+// -------------------------------------------------------------------------------------------------//
+// Constructor
+// -------------------------------------------------------------------------------------------------//
+
+TEST(KDTreeConstructor, Base) {
+  constexpr int DIM = 2;
+
+  KDTree<DIM> kdtree;
+
+  EXPECT_EQ(kdtree.size(), 0);
+  EXPECT_EQ(kdtree.points(), std::vector<pt<DIM>>{});
+}
+
+TEST(KDTreeConstructor, Empty) {
+  constexpr int DIM = 2;
+
+  std::vector<pt<DIM>> points = {};
+  KDTree<DIM> kdtree(points);
+
+  EXPECT_EQ(kdtree.size(), 0);
+  EXPECT_EQ(kdtree.points(), points);
+}
+
+TEST(KDTreeConstructor, Basic) {
   constexpr int DIM = 2;
   //
-  //   .(7, 1)
+  //
   //         .(6, 4)
   //
   //      .(5, 2)
-  //
+  //           .(7, 1)
   ///////////////////
 
   std::vector<pt<DIM>> points = {{7, 1}, {6, 4}, {5, 2}};
-  KDTree<DIM> kdtree(points, 0);
+  KDTree<DIM> kdtree(points);
 
   EXPECT_EQ(kdtree.size(), 3);
 };
 
-// TEST(KDTree, kNN) {
-//   constexpr int DIM = 2;
-//   //
-//   //   .(7, 1)
-//   //         .(6, 4)
-//   //
-//   //      .(5, 2)
-//   //
-//   ///////////////////
-//
-//   std::vector<pt<DIM>> points = {{7, 1}, {6, 4}, {5, 2}};
-//   KDTree<DIM> kdtree(points, 0);
-//
-//   pt<DIM> point = {6, 1};
-//   std::vector<int> result = kdtree.kNearestNeighbors(point);
-//   EXPECT_EQ(result[0], 0);
-//
-//   point = {7, 5};
-//   result = kdtree.kNearestNeighbors(point);
-//   EXPECT_EQ(result[0], 1);
-//
-//   point = {5, -3};
-//   result = kdtree.kNearestNeighbors(point);
-//   EXPECT_EQ(result[0], 2);
-// }
+// -------------------------------------------------------------------------------------------------//
+// Single Neighbor Query
+// -------------------------------------------------------------------------------------------------//
 
-TEST(KDTree, kNNBoundary) {
+TEST(KDTree1NN, Basic) {
+  constexpr int DIM = 2;
+  //
+  //
+  //         .(6, 4)
+  //
+  //      .(5, 2)
+  //           .(7, 1)
+  ///////////////////
+
+  std::vector<pt<DIM>> points = {{7, 1}, {6, 4}, {5, 2}};
+  KDTree<DIM> kdtree(points);
+
+  pt<DIM> point = {6, 3};
+  std::vector<int> result = kdtree.kNearestNeighbors(point);
+  EXPECT_EQ(result[0], 1);
+
+  point = {10, 1};
+  result = kdtree.kNearestNeighbors(point);
+  EXPECT_EQ(result[0], 0);
+
+  point = {0, 2};
+  result = kdtree.kNearestNeighbors(point);
+  EXPECT_EQ(result[0], 2);
+}
+
+TEST(KDTree1NN, Boundary) {
   constexpr int DIM = 2;
   //        .(8, 9)
   //        .query3(8, 8)
@@ -63,7 +90,7 @@ TEST(KDTree, kNNBoundary) {
 
   std::vector<pt<DIM>> points = {{8, 0}, {8, 5}, {8, 9}};
 
-  KDTree<DIM> kd(points, 0);
+  KDTree<DIM> kd(points);
 
   pt<DIM> query1 = {8, 3};
   std::vector<int> result = kd.kNearestNeighbors(query1);
@@ -78,7 +105,7 @@ TEST(KDTree, kNNBoundary) {
   EXPECT_EQ(result[0], 2);
 }
 
-TEST(KDTree, kNNBoundaryDense) {
+TEST(KDTree1NN, BoundaryDense) {
   constexpr int DIM = 2;
   //--------.R(8, 9)-------
   //        |
@@ -94,7 +121,7 @@ TEST(KDTree, kNNBoundaryDense) {
 
   std::vector<pt<DIM>> points = {{8, 0}, {8, 5}, {8, 9}};
 
-  KDTree<DIM> kd(points, 0);
+  KDTree<DIM> kd(points);
 
   pt<DIM> query = {8, 3};
 
@@ -103,12 +130,12 @@ TEST(KDTree, kNNBoundaryDense) {
   EXPECT_EQ(result[0], 1);
 }
 
-TEST(KDTree, kNNRandomDIM2) {
+TEST(KDTree1NN, RandomDIM2) {
   constexpr int DIM = 2;
 
   std::vector<pt<DIM>> points = {{8, 0}, {8, 5}, {8, 9}};
 
-  KDTree<DIM> kd(points, 0);
+  KDTree<DIM> kd(points);
 
   pt<DIM> query = {1, 2};
 
@@ -131,7 +158,7 @@ TEST(KDTree, kNNRandomDIM2) {
   }
 }
 
-TEST(KDTree, kNNRandomDIM3) {
+TEST(KDTree1NN, RandomDIM3) {
   constexpr int DIM = 3;
   const int max_points = 10000;
   std::random_device rd;
@@ -145,7 +172,7 @@ TEST(KDTree, kNNRandomDIM3) {
     points.push_back(point);
   }
 
-  KDTree<DIM> kd(points, 0);
+  KDTree<DIM> kd(points);
 
   pt<DIM> query = {1, 2, 3};
 
@@ -168,4 +195,40 @@ TEST(KDTree, kNNRandomDIM3) {
   }
 
   EXPECT_EQ(answer, points[result[0]]);
+}
+
+// -------------------------------------------------------------------------------------------------//
+// Multi Neighbor Query
+// -------------------------------------------------------------------------------------------------//
+
+TEST(KDTreekNN, Basic) {
+  constexpr int DIM = 2;
+  //
+  //
+  //         .(6, 4)
+  //
+  //      .(5, 2)
+  //           .(7, 1)
+  ///////////////////
+
+  std::vector<pt<DIM>> points = {{7, 1}, {6, 4}, {5, 2}};
+  KDTree<DIM> kdtree(points);
+
+  pt<DIM> point = {4, 4};
+  std::vector<int> result = kdtree.kNearestNeighbors(point, 2);
+  EXPECT_EQ(result[0], 1);
+  EXPECT_EQ(result[1], 2);
+  EXPECT_EQ(result.size(), 2);
+
+  point = {7, -1};
+  result = kdtree.kNearestNeighbors(point, 2);
+  EXPECT_EQ(result[0], 0);
+  EXPECT_EQ(result[1], 2);
+  EXPECT_EQ(result.size(), 2);
+
+  point = {15, 2.5};
+  result = kdtree.kNearestNeighbors(point, 2);
+  EXPECT_EQ(result[0], 0);
+  EXPECT_EQ(result[1], 1);
+  EXPECT_EQ(result.size(), 2);
 }

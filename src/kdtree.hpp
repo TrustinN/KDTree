@@ -5,17 +5,16 @@
 #include <boost/range/algorithm/copy.hpp>
 #include <boost/range/combine.hpp>
 #include <cmath>
-#include <iostream>
-#include <memory>
+#include <map>
 #include <numeric>
 #include <tuple>
 #include <vector>
 
+template <size_t k> using pt = std::array<double_t, k>;
+
 // -------------------------------------------------------------------------------------------------//
 // KDNode
 // -------------------------------------------------------------------------------------------------//
-
-template <size_t k> using pt = std::array<double_t, k>;
 
 template <size_t k> struct kdNode {
   kdNode(pt<k> location, int split_axis, int id)
@@ -45,6 +44,10 @@ void explore(kdNode<k> *node, const pt<k> &p,
   }
 };
 
+// -------------------------------------------------------------------------------------------------//
+// KDTree
+// -------------------------------------------------------------------------------------------------//
+
 template <size_t k> class KDTree {
 private:
   kdNode<k> *_root;
@@ -52,13 +55,19 @@ private:
   std::vector<pt<k>> _points;
 
 public:
-  KDTree(const std::vector<pt<k>> &points, int depth);
+  KDTree() : _root(nullptr), _size(0) {};
+  KDTree(const std::vector<pt<k>> &points);
+  std::vector<int> kNearestNeighbors(const pt<k> &p, int num = 1);
+
   size_t size() const { return _size; }
-  std::vector<int> kNearestNeighbors(const pt<k> &p);
+  std::vector<pt<k>> points() const { return _points; }
 };
 
-template <size_t k>
-KDTree<k>::KDTree(const std::vector<pt<k>> &points, int depth) {
+// -------------------------------------------------------------------------------------------------//
+// Implementation
+// -------------------------------------------------------------------------------------------------//
+
+template <size_t k> KDTree<k>::KDTree(const std::vector<pt<k>> &points) {
   // Initialize stored data
   _size = points.size();
   _points = points;
@@ -128,7 +137,7 @@ KDTree<k>::KDTree(const std::vector<pt<k>> &points, int depth) {
 }
 
 template <size_t k>
-std::vector<int> KDTree<k>::kNearestNeighbors(const pt<k> &p) {
+std::vector<int> KDTree<k>::kNearestNeighbors(const pt<k> &p, int num) {
   if (_size == 0) {
     return {};
   }
@@ -137,8 +146,9 @@ std::vector<int> KDTree<k>::kNearestNeighbors(const pt<k> &p) {
   std::vector<kdNode<k> *> traversed;
   ::explore<k>(_root, p, traversed);
 
-  double minDist = std::numeric_limits<double>::infinity();
+  double maxMinDist = -std::numeric_limits<double>::infinity();
   kdNode<k> *nearestNode = nullptr;
+  std::map<int, int> pq;
 
   while (!traversed.empty()) {
     kdNode<k> *node = traversed.back();
@@ -152,14 +162,23 @@ std::vector<int> KDTree<k>::kNearestNeighbors(const pt<k> &p) {
         diff.begin(), diff.end(), 0.0,
         [](double sum, double a) { return sum + std::pow(a, 2); });
 
-    if (sD < minDist) {
-      minDist = sD;
-      nearestNode = node;
+    if (sD < maxMinDist || pq.size() < num) {
+      if (sD > maxMinDist) {
+        maxMinDist = sD;
+      }
+      pq.insert({sD, node->_id});
+      if (pq.size() > num) {
+        // remove element with largest key(distance)
+        pq.erase(std::get<0>(*pq.rbegin()));
+
+        // reset max dist
+        maxMinDist = std::get<0>(*pq.rbegin());
+      }
     }
 
     int axis = node->_split_axis;
     // find distance to hyperplane by axis
-    if (std::pow(p[axis] - loc[axis], 2) <= minDist) {
+    if (std::pow(p[axis] - loc[axis], 2) <= maxMinDist) {
       // We must explore this node also
 
       // find out which side of axis node is currently on
@@ -173,7 +192,9 @@ std::vector<int> KDTree<k>::kNearestNeighbors(const pt<k> &p) {
     }
   }
 
-  std::vector<int> neighbors = {nearestNode->_id};
+  std::vector<int> neighbors(pq.size());
+  std::transform(pq.begin(), pq.end(), neighbors.begin(),
+                 [](const auto &x) { return std::get<1>(x); });
   return neighbors;
 }
 

@@ -17,7 +17,7 @@ int main() {
       {1, 2, 3}, {2, 3, 4}, {3, 4, 5}, {4, 5, 6},
       {5, 6, 7}, {6, 7, 8}, {7, 8, 9}, {8, 9, 10}};
 
-  KDTree<DIM> kdt = KDTree<DIM>(points, 0);
+  KDTree<DIM> kdt = KDTree<DIM>(points);
 
   return 0;
 }
