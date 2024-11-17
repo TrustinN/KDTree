@@ -1,9 +1,6 @@
 #ifndef KDTREE_H
 #define KDTREE_H
 
-#include <boost/iterator/counting_iterator.hpp>
-#include <boost/range/algorithm/copy.hpp>
-#include <boost/range/combine.hpp>
 #include <cmath>
 #include <map>
 #include <numeric>
@@ -77,24 +74,17 @@ template <size_t k> KDTree<k>::KDTree(const std::vector<pt<k>> &points) {
   if (points.empty()) {
     return;
   }
-  std::vector<pt<k>> currPoints = points;
-  std::vector<int> range(boost::counting_iterator<int>(0),
-                         boost::counting_iterator<int>(currPoints.size()));
-  auto currPointsIdxPair = boost::combine(range, currPoints);
-  // Initialize combinedPoints vector
-  std::vector<std::tuple<int, pt<k>>> combinedPoints;
 
-  // Manually iterate over the combined range and populate combinedPoints
-  for (const auto &pair : currPointsIdxPair) {
-    combinedPoints.emplace_back(pair.template get<0>(), pair.template get<1>());
+  // Pair points with their indices for later use
+  std::vector<std::tuple<int, pt<k>>> currPoints(_points.size());
+  for (int i = 0; i < _points.size(); ++i) {
+    currPoints[i] = {i, _points[i]};
   }
 
-  // iteratively build tree, store (current points, parent node of points,
-  // depth, left or right flag)
-  std::vector<
-      std::tuple<std::vector<std::tuple<int, pt<k>>>, kdNode<k> *, int, int>>
-      stack = {};
-  stack.push_back({combinedPoints, _root, 0, 0});
+  // Build the tree iteratively using a stack
+  typedef std::tuple<std::vector<std::tuple<int, pt<k>>>, kdNode<k> *, int, int>
+      TreeNodeInfo;
+  std::vector<TreeNodeInfo> stack = {{currPoints, _root, 0, 0}};
 
   while (!stack.empty()) {
     auto [currPoints, parent, depth, side] = stack.back();
